@@ -14,8 +14,8 @@
 <style>
 /*
 VOICE: calm, clinical, reassuring — a premium neighbourhood practice.
-IDEA: the clean, bright light of a treatment room; soft glass bubbles = fresh & clean.
-PICTURE: full-bleed patient close-up (photo slot) with a Three.js layer of floating glass bubbles.
+IDEA: the clean, bright light of a treatment room.
+PICTURE: full-bleed patient close-up photograph.
 COLOUR and TYPE: navy #0B2545, clinical blue #3A7BD5, mint #7FD1C7, off-white #F7FAFC; Plus Jakarta Sans.
 LAYOUT: full-width bands, 1240px content, glass cards over soft light fields.
 */
@@ -122,7 +122,6 @@ main{overflow-x:clip}
 /* ========== HERO ========== */
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;color:#fff;
   background:var(--hero-img) center/cover no-repeat,radial-gradient(ellipse at 50% 60%,#E9F1F7 0%,#BCD2E3 40%,#86A8C4 80%)}
-.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1}
 .hero .grid{position:absolute;inset:0;z-index:2;pointer-events:none;
   background-image:linear-gradient(rgba(255,255,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.14) 1px,transparent 1px);background-size:120px 120px}
 .hero .scrim{position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(11,37,69,.66),rgba(11,37,69,.36) 45%,rgba(11,37,69,.7))}
@@ -394,7 +393,6 @@ footer ::selection{background:rgba(127,209,199,.35);color:#fff}
 <main id="top"><span id="main" tabindex="-1"></span>
 <!-- ================= HERO ================= -->
 <section class="hero" id="hero">
-  <canvas id="gl" aria-hidden="true"></canvas>
   <div class="grid"></div>
   <div class="scrim"></div>
   <div class="hero-c">
@@ -575,7 +573,6 @@ footer ::selection{background:rgba(127,209,199,.35);color:#fff}
 
 <div class="mbar"><a class="btn call" href="tel:+15125550148"><svg class="ico" aria-hidden="true" focusable="false" style="width:18px;height:18px"><use href="#i-phone"/></svg>Call us</a><a class="btn btn-blue" href="#book">Book a visit</a></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 {
 /* ---------- content ---------- */
@@ -725,43 +722,6 @@ form.addEventListener('submit',e=>{
   },700);
 });
 
-/* ---------- Three.js hero: floating glass bubbles ---------- */
-const canvas=$('#gl'),hero=$('#hero');
-if(window.THREE&&canvas){
-  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  const scene=new THREE.Scene();
-  const cam=new THREE.PerspectiveCamera(45,1,.1,100);cam.position.z=14;
-  scene.add(new THREE.AmbientLight(0xffffff,.65));
-  const key=new THREE.DirectionalLight(0xffffff,1.1);key.position.set(5,8,6);scene.add(key);
-  const mint=new THREE.PointLight(0x7fd1c7,1.4,40);mint.position.set(-8,-4,6);scene.add(mint);
-  const blue=new THREE.PointLight(0x3a7bd5,1.2,40);blue.position.set(8,3,4);scene.add(blue);
-  const geo=new THREE.SphereGeometry(1,48,48);
-  const mats=[0xffffff,0xdff3f0,0xdbe8f7].map(c=>new THREE.MeshPhysicalMaterial({color:c,roughness:.08,metalness:.05,clearcoat:1,clearcoatRoughness:.05,transparent:true,opacity:.42}));
-  const balls=[];
-  for(let i=0;i<16;i++){
-    const m=new THREE.Mesh(geo,mats[i%3]);const s=.25+Math.random()*1.05;m.scale.setScalar(s);
-    m.position.set((Math.random()-.5)*22,(Math.random()-.5)*12,(Math.random()-.5)*6-1);
-    m.userData={y:m.position.y,sp:.25+Math.random()*.45,ph:Math.random()*6.28,dx:(Math.random()-.5)*.003};
-    scene.add(m);balls.push(m);
-  }
-  const ring=new THREE.Mesh(new THREE.TorusGeometry(5.2,.035,16,160),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.25}));
-  ring.rotation.x=1.25;scene.add(ring);
-  const size=()=>{const w=hero.clientWidth,h=hero.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()};
-  const ro=new ResizeObserver(size);ro.observe(hero);size();
-  let visible=true,raf=0;
-  const draw=t=>{
-    const k=t/1000;
-    balls.forEach(b=>{const u=b.userData;b.position.y=u.y+Math.sin(k*u.sp+u.ph)*.6;b.position.x+=u.dx;if(Math.abs(b.position.x)>12)u.dx*=-1;b.rotation.y=k*.2});
-    ring.rotation.z=k*.05;
-    cam.position.y=-Math.min(scrollY,hero.clientHeight)/hero.clientHeight*2;
-    renderer.render(scene,cam);
-    if(visible&&!reduce)raf=requestAnimationFrame(draw);
-  };
-  const hio=new IntersectionObserver(([e])=>{visible=e.isIntersecting;cancelAnimationFrame(raf);if(visible)raf=requestAnimationFrame(draw)});
-  hio.observe(hero);
-  requestAnimationFrame(draw);
-}
 }
 </script>
 </body>
