@@ -6,6 +6,7 @@
 <title>Lumen Dental Studio</title>
 <meta name="description" content="Gentle, modern dentistry in Austin, Texas. Cleanings, cosmetic dentistry, implants, Invisalign and pediatric care. Book online or call (512) 555-0148.">
 <meta name="theme-color" content="#0B2545">
+<link rel="preload" as="image" href="images/hero.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
@@ -23,7 +24,7 @@ LAYOUT: full-width bands, 1240px content, glass cards over soft light fields.
    When you have photos, set them here (paths relative to this file):
    --hero-img: url("images/hero.jpg");  and replace each .ph div with an <img>  */
 :root{
-  --hero-img:none;
+  --hero-img:url("images/hero.webp");
   --navy:#0B2545;--navy-2:#071A33;--blue:#3A7BD5;--blue-ink:#2C66B8;--mint:#7FD1C7;--mint-ink:#1A6B62;
   --bg:#F7FAFC;--ink:#0B2545;--muted:#51637A;--line:#E3EAF2;
   --glass:rgba(255,255,255,.55);--glass-line:rgba(255,255,255,.75);
@@ -310,6 +311,33 @@ footer ::selection{background:rgba(127,209,199,.35);color:#fff}
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .js .rv{opacity:1;transform:none;filter:none}
 }
+
+/* Original, optimized photography throughout the existing layout. */
+.hero{background-position:50% 42%}
+.hero .grid{opacity:.35}
+.care-photo{width:100%;height:100%;object-fit:cover;object-position:62% 50%;border-radius:28px}
+.svc{padding:0;gap:0;overflow:hidden}
+.svc-photo{width:100%;height:210px;object-fit:cover;flex:none}
+.svc-body{display:flex;flex:1;flex-direction:column;gap:16px;padding:30px}
+.svc-body .more{padding-top:8px}
+.offer-photo{width:240px;height:190px;object-fit:cover;border-radius:20px;flex:0 1 240px}
+.step-photo{width:100%;height:180px;object-fit:cover;border-radius:16px;margin-bottom:24px}
+.doc-photo{width:100%;height:360px;object-fit:cover;object-position:50% 25%}
+.section-photo{width:100%;object-fit:cover;border-radius:28px;box-shadow:var(--shadow)}
+.reviews-photo{height:360px;object-position:50% 40%;margin-bottom:32px}
+.insurance-photo{height:330px;max-width:860px;margin:32px auto 0;object-position:50% 35%}
+.faq-photo{height:300px;max-width:860px;margin:32px auto 0;object-position:50% 38%}
+.booking-photo{width:100%;height:240px;object-fit:cover;border-radius:20px;margin-bottom:28px}
+@media(max-width:640px){
+  .hero{background-position:58% center}
+  .svc-photo{height:200px}
+  .svc-body{padding:26px}
+  .offer-photo{width:100%;height:210px;flex-basis:100%}
+  .doc-photo{height:360px}
+  .reviews-photo,.insurance-photo,.faq-photo{height:240px}
+  .booking-photo{height:200px}
+}
+
 </style>
 </head>
 <body>
@@ -413,7 +441,8 @@ footer ::selection{background:rgba(127,209,199,.35);color:#fff}
 <!-- ================= OFFER ================= -->
 <section class="wrap rv" aria-label="New patient special">
   <div class="offer">
-    <div style="flex:1 1 480px">
+    <img class="offer-photo" src="images/clinic.webp" width="1200" height="800" alt="Bright dental studio with a powder blue chair and natural light" loading="lazy" decoding="async">
+    <div style="flex:1 1 340px">
       <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-spark"/></svg>New patient special</span>
       <h3>Exam, digital X-rays &amp; cleaning at one simple price</h3>
       <p>For patients without insurance. Insured? Your first visit is often fully covered.</p>
@@ -428,7 +457,7 @@ footer ::selection{background:rgba(127,209,199,.35);color:#fff}
   <div class="wrap split">
     <div class="photo rv">
       <!-- PHOTO: dentist with patient → replace .ph with <img src="images/why.jpg" alt="..." style="width:100%;height:100%;object-fit:cover;border-radius:28px"> -->
-      <div class="ph" style="border-radius:28px">Photo: dentist in loupes treating a relaxed, smiling patient</div>
+      <img class="care-photo" src="images/treatment.webp" width="1536" height="1024" alt="Female dentist using magnifying loupes during a gentle exam with a relaxed female patient" loading="lazy" decoding="async">
       <div class="badge glass">
         <i style="width:44px;height:44px;border-radius:50%;background:#DFF3F0;color:var(--mint-ink);display:grid;place-items:center"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-smile"/></svg></i>
         <div><small style="color:var(--muted);font-size:13px">Pain-free experience</small><b style="display:flex;align-items:center;gap:8px;font-size:20px"><span class="num">4.9/5</span> <span class="stars" aria-hidden="true"><svg class="star"><use href="#i-star"/></svg><svg class="star"><use href="#i-star"/></svg><svg class="star"><use href="#i-star"/></svg><svg class="star"><use href="#i-star"/></svg><svg class="star"><use href="#i-star"/></svg></span></b></div>
@@ -458,7 +487,7 @@ footer ::selection{background:rgba(127,209,199,.35);color:#fff}
   <div class="wrap">
     <div class="center rv"><h2>Dentists who actually listen</h2><p class="lead">Board-certified, endlessly patient, and here for the long run.</p></div>
     <div class="g3" id="team-grid" style="margin-top:48px"></div>
-    <p class="note center">Sample profiles for preview — replace with the practice's dentists.</p>
+    <p class="note center">Sample profiles and AI-generated portraits for preview — replace with the practice's dentists.</p>
   </div>
 </section>
 
@@ -471,15 +500,17 @@ footer ::selection{background:rgba(127,209,199,.35);color:#fff}
         <p class="lead" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px"><b style="color:var(--ink)" class="num">4.9</b> <span class="stars" aria-hidden="true"><svg class="star"><use href="#i-star"/></svg><svg class="star"><use href="#i-star"/></svg><svg class="star"><use href="#i-star"/></svg><svg class="star"><use href="#i-star"/></svg><svg class="star"><use href="#i-star"/></svg></span> average rating on Google</p></div>
       <div class="arrows"><button class="arr" id="prev" aria-label="Previous review"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-back"/></svg></button><button class="arr" id="next" aria-label="Next review"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></button></div>
     </div>
+    <img class="section-photo reviews-photo rv" src="images/family.webp" width="1200" height="800" alt="Mother and daughter laughing together" loading="lazy" decoding="async">
     <div class="car" id="car" tabindex="0" aria-label="Patient reviews, scroll sideways"></div>
     <p class="note">Sample reviews for preview — replace with the practice's real Google reviews.</p>
   </div>
 </section>
 
 <!-- ================= INSURANCE ================= -->
-<section class="band center" style="padding-bottom:40px">
+<section class="band center" id="insurance" style="padding-bottom:40px">
   <div class="wrap rv">
     <h2 style="font-size:clamp(28px,3vw,36px)">In-network with most major PPO plans</h2>
+    <img class="section-photo insurance-photo" src="images/consultation.webp" width="1200" height="800" alt="Female dentist discussing care and payment options with a female patient" loading="lazy" decoding="async">
     <div class="ins" id="ins"></div>
     <p class="lead" style="margin-top:28px;font-size:15px">No insurance? Ask about our Lumen Membership Plan and 0% monthly financing.</p>
   </div>
@@ -491,6 +522,7 @@ footer ::selection{background:rgba(127,209,199,.35);color:#fff}
   <div class="field" style="width:380px;height:380px;background:#BDEBE4;left:6%;bottom:60px"></div>
   <div class="wrap">
     <div class="center rv"><h2>Questions patients ask us</h2></div>
+    <img class="section-photo faq-photo rv" src="images/aligners.webp" width="1200" height="800" alt="Woman showing a clear aligner and a confident smile" loading="lazy" decoding="async">
     <div class="faq" id="faqList"></div>
   </div>
 </section>
@@ -500,6 +532,7 @@ footer ::selection{background:rgba(127,209,199,.35);color:#fff}
   <div class="book rv">
     <div class="field" style="width:420px;height:420px;background:#3A7BD5;opacity:.35;right:-60px;top:-80px"></div>
     <div>
+      <img class="booking-photo" src="images/consultation.webp" width="1200" height="800" alt="A friendly conversation between a female dentist and her female patient" loading="lazy" decoding="async">
       <h2>Ready for your healthiest smile?</h2>
       <p>Request a time and we'll confirm within one business hour. Prefer to talk?</p>
       <a class="big-tel" href="tel:+15125550148"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>(512) 555-0148</a>
@@ -526,7 +559,7 @@ footer ::selection{background:rgba(127,209,199,.35);color:#fff}
       <p style="margin-top:10px;font-size:15px"><a href="tel:+15125550148" style="color:var(--mint);font-weight:700">(512) 555-0148</a><br><a href="mailto:hello@lumendental.com">hello@lumendental.com</a></p>
     </div>
     <div><h4>Opening hours</h4><p style="font-size:15px;line-height:1.9">Mon–Thu · 8am–7pm<br>Fri · 8am–4pm<br>Sat · 9am–2pm<br>Sun · Emergencies only</p></div>
-    <div><h4>Quick links</h4><div class="f-links"><a href="#services">Services</a><a href="#team">Our Dentists</a><a href="#book">New Patients</a><a href="#faq">Insurance &amp; Financing</a><a href="#">Privacy Policy</a></div></div>
+    <div><h4>Quick links</h4><div class="f-links"><a href="#services">Services</a><a href="#team">Our Dentists</a><a href="#book">New Patients</a><a href="#insurance">Insurance &amp; Financing</a><a href="#">Privacy Policy</a></div></div>
     <div>
       <!-- MAP: replace with an embedded Google Map iframe on the live site -->
       <div class="map">Map · Barton Springs Rd</div>
@@ -564,7 +597,7 @@ const steps=[
  ['Leave with a clear plan','Upfront pricing, insurance estimates and payment options, all in writing before any treatment.']];
 const team=[
  ['Dr. Emily Carter, DDS','Founder · General & Cosmetic','15 years in practice · ADA member','#DCE8F4'],
- ['Dr. Marcus Reyes, DMD','Implants & Restorative','Advanced implant training','#DDF1EE'],
+ ['Dr. Maya Reyes, DMD','Implants & Restorative','Advanced implant training','#DDF1EE'],
  ['Dr. Priya Nair, DDS','Pediatric Dentistry','Board-certified pediatric dentist','#E6E9F7']];
 const reviews=[
  ['I had avoided the dentist for years. Everything was explained and I honestly felt nothing. First time I left a dental office smiling.','Rachel M.','Cleaning & fillings'],
@@ -583,10 +616,15 @@ const faqs=[
 const $=s=>document.querySelector(s);
 const icon=id=>`<svg class="ico" aria-hidden="true" focusable="false"><use href="#${id}"/></svg>`;
 const svcOpt=['Checkup & cleaning','Checkup & cleaning','Teeth whitening','Dental implants','Invisalign','Pediatric visit'];
-$('#svcGrid').innerHTML=services.map(([i,t,d],k)=>`<a href="#book" class="svc glass tilt rv" data-svc="${svcOpt[k]}"><span class="ic">${icon(i)}</span><h3>${t}</h3><p>${d}</p><span class="more">Book this service ${icon('i-arrow')}</span></a>`).join('');
+const servicePhotos=['treatment','hero','whitening','implants','aligners','family'];
+const serviceAlts=['Female dentist examining a relaxed female patient','Natural smile during a gentle dental check','Close-up of a woman brushing healthy teeth','Illustrative titanium implant and ceramic crown','Woman holding a transparent dental aligner','Mother and daughter sharing a happy smile'];
+$('#svcGrid').innerHTML=services.map(([i,t,d],k)=>`<a href="#book" class="svc glass tilt rv" data-svc="${svcOpt[k]}"><img class="svc-photo" src="images/${servicePhotos[k]}.webp" width="1200" height="800" alt="${serviceAlts[k]}" loading="lazy" decoding="async"><div class="svc-body"><span class="ic">${icon(i)}</span><h3>${t}</h3><p>${d}</p><span class="more">Book this service ${icon('i-arrow')}</span></div></a>`).join('');
 $('#perks').innerHTML=perks.map(([i,t,d])=>`<div class="perk glass"><i>${icon(i)}</i><div><b>${t}</b><span>${d}</span></div></div>`).join('');
-$('#steps').innerHTML=steps.map(([t,d],k)=>`<div class="step glass tilt rv"><span class="n">${k+1}</span><h3>${t}</h3><p>${d}</p></div>`).join('');
-$('#team-grid').innerHTML=team.map(([n,r,c,bg])=>`<article class="doc glass tilt rv"><!-- PHOTO: portrait of ${n} --><div class="ph" style="background:${bg}">Portrait · ${n}</div><div class="t"><h3>${n}</h3><p class="role">${r}</p><small>${c}</small></div></article>`).join('');
+const stepPhotos=['clinic','treatment','consultation'];
+const stepAlts=['Welcoming light-filled dental studio','Gentle examination with a female dentist','Female dentist explaining a treatment plan to a female patient'];
+$('#steps').innerHTML=steps.map(([t,d],k)=>`<div class="step glass tilt rv"><img class="step-photo" src="images/${stepPhotos[k]}.webp" width="1200" height="800" alt="${stepAlts[k]}" loading="lazy" decoding="async"><span class="n">${k+1}</span><h3>${t}</h3><p>${d}</p></div>`).join('');
+const teamPhotos=['dentist-emily','dentist-maya','dentist-priya'];
+$('#team-grid').innerHTML=team.map(([n,r,c,bg],k)=>`<article class="doc glass tilt rv"><img class="doc-photo" src="images/${teamPhotos[k]}.webp" width="900" height="1200" alt="Illustrative portrait for sample profile: ${n}" loading="lazy" decoding="async"><div class="t"><h3>${n}</h3><p class="role">${r}</p><small>${c}</small></div></article>`).join('');
 $('#car').innerHTML=reviews.map(([q,n,m])=>`<figure class="rev glass" style="margin:0"><div style="display:flex;justify-content:space-between"><span class="stars" role="img" aria-label="5 out of 5 stars">${'<svg class="star" aria-hidden="true"><use href="#i-star"/></svg>'.repeat(5)}</span><small style="color:var(--muted)">Google review</small></div><q>${q}</q><figcaption class="who"><span class="av">${n.split(' ').map(w=>w[0]).join('')}</span><span><b>${n}</b><small>${m}</small></span></figcaption></figure>`).join('');
 $('#ins').innerHTML=ins.map(x=>`<div>${x}</div>`).join('');
 $('#faqList').innerHTML=faqs.map(([q,a],k)=>`<div class="q glass"><button aria-expanded="false" aria-controls="fa${k}" id="fq${k}">${q}<span class="pm">${icon('i-plus')}</span></button><div class="a" id="fa${k}" role="region" aria-labelledby="fq${k}"><div><p>${a}</p></div></div></div>`).join('');
@@ -728,3 +766,4 @@ if(window.THREE&&canvas){
 </script>
 </body>
 </html>
+
